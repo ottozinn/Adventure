@@ -1,16 +1,29 @@
 import random
-global time
+import time
 import sys
 
 sleep = 1
 max = 100
 dice_val = 6
 
+snakes = {
+    7: 1,
+    29: 13,
+    49: 23,
+    63: 32,
+    77: 30,
+    99: 5
+}
 
-def intro():
-    global name
-    name = input("What is your name?")
-    welcome(name)
+ladders = {
+    8: 69,
+    19: 31,
+    44: 52,
+    55: 61,
+    72: 98,
+    83: 91,
+}
+
 
 def welcome():
     msg = """
@@ -25,17 +38,15 @@ def welcome():
     print(msg)
     
 def diceRoll():
-    def get_dice_value():
     time.sleep(sleep)
     dice_value = random.randint(1, dice_val)
     print("Its a " + str(dice_val))
     return dice_val
         
 def start():
-    welcome_msg()
-    time.sleep(SLEEP_BETWEEN_ACTIONS)
+    time.sleep(sleep)
     player1_name, player2_name = get_player_names()
-    time.sleep(SLEEP_BETWEEN_ACTIONS)
+    time.sleep(sleep)
 
     player1_current_position = 0
     player2_current_position = 0
@@ -43,15 +54,19 @@ def start():
 def get_player_names():
     player1_name = None
     while not player1_name:
-        player1_name = input("Please enter a valid name for first player: ").strip()
+        player1_name = input("Please enter a name for first player: ").strip()
 
     player2_name = None
     while not player2_name:
-        player2_name = input("Please enter a valid name for second player: ").strip()
+        player2_name = input("Please enter a name for second player: ").strip()
 
     print("\nMatch will be played between '" + player1_name + "' and '" + player2_name + "'\n")
     return player1_name, player2_name
 
 
 # driver
-intro()          
+welcome()
+diceRoll()
+start()
+
+          
