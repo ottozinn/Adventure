@@ -30,11 +30,12 @@ def welcome():
       Rules:
       1. Both players start at 0 
          Take turns rolling the dice. 
-         Move forward the number of spaces shown on the dice.
-      2. If you lands at the bottom of a ladder, move up to the top of the ladder.
-      3. If you lands on the head of a snake, you slide down to the bottom of the snake.
-      4. The first player to get to 100 is the winner.
-      5. Hit enter to roll the dice. """
+         You automatically move forward the number of spaces shown on the dice
+      2. If you lands at the bottom of a ladder, move up to the top of the ladder
+      3. If you lands on the head of a snake, you slide down to the bottom of the snake
+      4. The first player to get to 100 wins.
+      5. Denton will always lose
+      6. Hit enter to roll the dice """
     print(msg)
     
 def diceRoll():
@@ -62,6 +63,39 @@ def get_player_names():
 
     print("\nMatch will be played between '" + player1_name + "' and '" + player2_name + "'\n")
     return player1_name, player2_name
+
+def snake_bite(old_value, current_value, player_name):
+    print("\n" + random.choice(snake_bite).upper() + " ~~~~~~~~>")
+    print("\n" + player_name + " got a snake bite :////. You have to move from " + str(old_value) + " to " + str(current_value))
+
+
+def ladder_jump(old_value, current_value, player_name):
+    print("\n" + random.choice(ladder_jump).upper() + " ########")
+    print("\n" + player_name + " Climb the ladder :0  " + str(old_value) + " to " + str(current_value))
+
+
+def snake_ladder(player_name, current_value, dice_value):
+    time.sleep(sleep)
+    old_value = current_value
+    current_value = current_value + dice_value
+
+    if current_value > MAX_VAL:
+        print("You need " + str(MAX_VAL - old_value) + " to win this game. Keep trying.")
+        return old_value
+
+    print("\n" + player_name + " moved from " + str(old_value) + " to " + str(current_value))
+    if current_value in snakes:
+        final_value = snakes.get(current_value)
+        snake_bite(current_value, final_value, player_name)
+
+    elif current_value in ladders:
+        final_value = ladders.get(current_value)
+        ladder_jump(current_value, final_value, player_name)
+
+    else:
+        final_value = current_value
+
+    return final_value
 
 
 # driver
